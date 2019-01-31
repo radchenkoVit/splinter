@@ -5,6 +5,11 @@
 </head>
 <body>
     <div id="app">
+
+        <form action="/logout" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+
         <form action="/" method="post" >
             <input name="text" placeholder="Write Message Here"/>
             <input name="tag" placeholder="Write Tag Here"/>
