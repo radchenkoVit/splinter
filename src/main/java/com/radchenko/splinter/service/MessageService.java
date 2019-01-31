@@ -1,11 +1,12 @@
 package com.radchenko.splinter.service;
 
 import com.radchenko.splinter.entity.Message;
+import com.radchenko.splinter.web.response.MessageDto;
 
 import java.util.List;
 
 public interface MessageService {
-    List<Message> getAll();
-    Message save(Message message);
-    List<Message> filterByTag(String tagFilter);
+    List<MessageDto> getAll();
+    MessageDto save(Message message);
+    List<MessageDto> filterByTag(String tagFilter);
 }

@@ -2,6 +2,7 @@ package com.radchenko.splinter.web;
 
 import com.radchenko.splinter.entity.Message;
 import com.radchenko.splinter.service.MessageService;
+import com.radchenko.splinter.web.response.MessageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +41,7 @@ public class MessageController {
     @RequestMapping(path = "/filter")
     public String filterMessage(@RequestParam(name = "msg_tag_filter") String tagFilter, Model model) {
         if (tagFilter != null && !tagFilter.isEmpty()) {
-            List<Message> list = messageService.filterByTag(tagFilter);
+            List<MessageDto> list = messageService.filterByTag(tagFilter);
             model.addAttribute("messages", list);
         } else {
             model.addAttribute("messages", messageService.getAll());
