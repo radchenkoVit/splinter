@@ -1,4 +1,4 @@
-package com.radchenko.splinter;
+package com.radchenko.splinter.service;
 
 import com.radchenko.splinter.entity.Message;
 import com.radchenko.splinter.repository.MessageRepository;
@@ -9,12 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class MessageService {
+public class MessageServiceImpl implements MessageService {
 
     private final MessageRepository messageRepository;
 
     @Autowired
-    public MessageService(MessageRepository messageRepository) {
+    public MessageServiceImpl(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
 
@@ -23,10 +23,11 @@ public class MessageService {
         return messageRepository.findAll();
     }
 
-    public void save(Message message) {
-        messageRepository.save(message);
+    public Message save(Message message) {
+       return messageRepository.save(message);
     }
 
+    @Transactional(readOnly = true)
     public List<Message> filterByTag(String tagFilter) {
         return messageRepository.findByTag(tagFilter);
     }

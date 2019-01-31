@@ -13,7 +13,7 @@
 
         <div>
             <p>Filter by tag</p>
-            <form action="/filter">
+            <form action="/filter" method="post">
                 <input type="text" name="msg_tag_filter" placeholder="Filter by tag">
                 <button type="submit">Filter</button>
             </form>
