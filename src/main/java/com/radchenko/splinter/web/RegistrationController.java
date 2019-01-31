@@ -36,7 +36,7 @@ public class RegistrationController {
         }
 
         userService.register(regModel);
-        return "redirect:/login?message=User created. Please log in";
+        return "redirect:/login?message=User created. Please log in";//TODO
     }
 
 }
