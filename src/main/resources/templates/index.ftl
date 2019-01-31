@@ -23,7 +23,11 @@
             <#list messages>
                 <ul>
                     <#items as m>
-                        <li>${m.text}#${m.tag}</li>
+                        <li>
+                            <b>${m.id}</b>
+                            ${m.text}
+                            <i>#${m.tag}</i>
+                        </li>
                     </#items>
                 </ul>
             </#list>
