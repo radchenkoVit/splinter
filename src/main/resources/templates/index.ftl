@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
-    <div id="app">
+<#import "parts/common.ftl" as c>
 
+<@c.page>
+    <div id="app">
         <form action="/logout" method="post">
             <#--<input id="csrf_token" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
             <input type="submit" value="Sign Out"/>
@@ -17,7 +13,6 @@
             <#--<input id="csrf_token" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
             <button type="submit">Send</button>
         </form>
-
         <div>
             <p>Filter by tag</p>
             <form action="/filter" method="post">
@@ -26,7 +21,6 @@
                 <button type="submit">Filter</button>
             </form>
         </div>
-
         <div>
             <#list messages>
                 <ul>
@@ -42,5 +36,4 @@
             </#list>
         </div>
     </div>
-</body>
-</html>
+</@c.page>
