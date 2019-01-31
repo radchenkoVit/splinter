@@ -1,4 +1,4 @@
-package com.radchenko.splinter.web;
+package com.radchenko.splinter.web.request;
 
 import lombok.Data;
 

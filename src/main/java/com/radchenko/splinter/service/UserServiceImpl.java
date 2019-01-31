@@ -2,7 +2,7 @@ package com.radchenko.splinter.service;
 
 import com.radchenko.splinter.entity.User;
 import com.radchenko.splinter.repository.UserRepository;
-import com.radchenko.splinter.web.UserRegModel;
+import com.radchenko.splinter.web.request.UserRegModel;
 import com.radchenko.splinter.web.response.UserDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -43,5 +45,13 @@ public class UserServiceImpl implements UserService {
         User eUser = mapper.map(user, User.class);
         eUser.setPassword(passwordEncoder.encode(eUser.getPassword()));
         userRepository.save(eUser);
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserDto> getAll() {
+        return userRepository.findAll()
+                .stream()
+                .map(u -> mapper.map(u, UserDto.class))
+                .collect(Collectors.toList());
     }
 }
