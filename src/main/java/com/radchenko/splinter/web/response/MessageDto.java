@@ -7,4 +7,5 @@ public class MessageDto {
     private Long id;
     private String text;
     private String tag;
+    private UserDto author;
 }

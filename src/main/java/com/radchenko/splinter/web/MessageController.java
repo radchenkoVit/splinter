@@ -1,9 +1,12 @@
 package com.radchenko.splinter.web;
 
 import com.radchenko.splinter.entity.Message;
+import com.radchenko.splinter.entity.User;
 import com.radchenko.splinter.service.MessageService;
+import com.radchenko.splinter.service.auth.UserPrincipal;
 import com.radchenko.splinter.web.response.MessageDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +33,11 @@ public class MessageController {
     }
 
     @PostMapping
-    public String addMessage(@RequestParam(name = "text") String text,
-                           @RequestParam(name = "tag") String tag) {
-        Message message = new Message(null, text, tag);
+    public String addMessage(
+                            @AuthenticationPrincipal UserPrincipal user,//TODO: офигеть просто
+                            @RequestParam(name = "text") String text,
+                            @RequestParam(name = "tag") String tag) {
+        Message message = new Message(null, text, tag, user.getUser());
         messageService.save(message);
         return "redirect:/";
     }

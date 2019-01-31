@@ -11,7 +11,9 @@ create table messages(
   id IDENTITY,
   text VARCHAR(255) NOT NULL,
   tag VARCHAR(255) NOT NULL,
-  CONSTRAINT messages_PK PRIMARY KEY (id)
+  user_id BIGINT NOT NULL,
+  CONSTRAINT messages_PK PRIMARY KEY (id),
+  CONSTRAINT messages_FK FOREIGN KEY (user_id) REFERENCES users
 );
 
 create table roles (
