@@ -10,6 +10,11 @@
     <input type="text" name="firstName" value="${user.firstName}"/>
     <input type="text" name="lastName" value="${user.lastName}"/>
     <input type="text" name="email" value="${user.email}"/>
+    <#list roles as role>
+        <label>
+            <input type="checkbox" name="${role} ${user.roles?seq_contains(role)?string("checked", "")}">${role}</input>
+        </label>
+    </#list>
     <#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
     <input type="submit" value="Save"/>
     </form>

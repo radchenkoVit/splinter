@@ -64,6 +64,9 @@ public class UserServiceImpl implements UserService {
             throw new NotFoundEntityException(format("user with id: %s not found", userdto.getId()));
         }
         User uEntity = uEntityOptional.get();
+
+
+        //TODO: uEntity.getRoles().clear();
         mapper.map(userdto, uEntity);
     }
 
