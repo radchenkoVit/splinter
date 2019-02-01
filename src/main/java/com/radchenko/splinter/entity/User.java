@@ -1,6 +1,7 @@
 package com.radchenko.splinter.entity;
 
 import com.radchenko.splinter.entity.role.Role;
+import com.radchenko.splinter.entity.role.RoleType;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -51,4 +52,9 @@ public class User {
     @Setter(AccessLevel.PRIVATE)
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Message> messages = new ArrayList<>();
+
+    public void addRoles(RoleType roleType) {
+        Role role = new Role(null, roleType, this);
+        this.getRoles().add(role);
+    }
 }

@@ -2,6 +2,10 @@
 
 <@c.page>
     <div id="app">
+    <div>
+        ${message?ifExists}
+    </div>
+
         <form action="/registration" method="post">
             <div><label> Name : <input type="text" name="firstName"/> </label></div>
             <div><label> Email : <input type="text" name="email"/> </label></div>

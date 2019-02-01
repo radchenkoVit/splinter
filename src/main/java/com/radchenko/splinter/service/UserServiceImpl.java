@@ -1,6 +1,8 @@
 package com.radchenko.splinter.service;
 
 import com.radchenko.splinter.entity.User;
+import com.radchenko.splinter.entity.role.Role;
+import com.radchenko.splinter.entity.role.RoleType;
 import com.radchenko.splinter.exceptions.NotFoundEntityException;
 import com.radchenko.splinter.repository.UserRepository;
 import com.radchenko.splinter.web.request.UserRegModel;
@@ -54,6 +56,7 @@ public class UserServiceImpl implements UserService {
     public void register(UserRegModel user) {
         User eUser = mapper.map(user, User.class);
         eUser.setPassword(passwordEncoder.encode(eUser.getPassword()));
+        eUser.addRoles(RoleType.ROLE_USER);
         userRepository.save(eUser);
     }
 

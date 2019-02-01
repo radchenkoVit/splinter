@@ -1,7 +1,9 @@
 package com.radchenko.splinter.entity.role;
 
 import com.radchenko.splinter.entity.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -23,6 +25,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "roles", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "role_type"}))
 @ToString(exclude = "user")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Role {
 
     @Id

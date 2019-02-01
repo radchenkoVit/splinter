@@ -1,5 +1,6 @@
 package com.radchenko.splinter.config;
 
+import com.radchenko.splinter.entity.role.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static com.radchenko.splinter.entity.role.RoleType.ROLE_ADMIN;
+import static com.radchenko.splinter.entity.role.RoleType.ROLE_USER;
 
 @Configuration
 @EnableWebSecurity
@@ -38,8 +40,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/user**").hasRole(ROLE_ADMIN.val()) //forbid to see add application page except user with Developer Role
                 .antMatchers("/login", "/registration").permitAll()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/user**").hasRole(ROLE_ADMIN.val()) //forbid to see add application page except user with Developer Role
+                .antMatchers("/**").hasAnyRole(ROLE_ADMIN.val(), ROLE_USER.val()) //forbid to see add application page except user with Developer Role
                 .and()
                     .formLogin()
                     .loginPage("/login")

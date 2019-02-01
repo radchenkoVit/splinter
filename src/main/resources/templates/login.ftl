@@ -3,9 +3,7 @@
 <@c.page>
     <div id="app">
         <div>
-            <#if message??>
-                <p>message</p>
-            </#if>
+            ${message?ifExists}
         </div>
 
         <form action="/login" method="post">
