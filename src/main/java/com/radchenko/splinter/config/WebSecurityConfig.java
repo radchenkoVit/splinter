@@ -48,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin()
                     .loginPage("/login")
+                    .defaultSuccessUrl("/", true)//https://stackoverflow.com/questions/36243352/how-to-set-redirection-after-successful-login
                     .permitAll()
                 .and()
                     .logout()
