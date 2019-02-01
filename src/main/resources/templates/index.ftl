@@ -4,6 +4,7 @@
 <@c.page>
     <div id="app">
         <@l.logout/>
+        <span><a href="/user">Users Page</a></span>
 
         <form action="/" method="post" >
             <input name="text" placeholder="Write Message Here"/>

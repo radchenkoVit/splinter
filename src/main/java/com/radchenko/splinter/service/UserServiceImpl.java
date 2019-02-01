@@ -1,6 +1,7 @@
 package com.radchenko.splinter.service;
 
 import com.radchenko.splinter.entity.User;
+import com.radchenko.splinter.exceptions.NotFoundEntityException;
 import com.radchenko.splinter.repository.UserRepository;
 import com.radchenko.splinter.web.request.UserRegModel;
 import com.radchenko.splinter.web.response.UserDto;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.lang.String.format;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -40,11 +43,28 @@ public class UserServiceImpl implements UserService {
         return Optional.empty();
     }
 
+    @Transactional(readOnly = true)
+    public UserDto findById(Long id) {
+       return userRepository.findById(id)
+               .map(u -> mapper.map(u, UserDto.class))
+               .orElseThrow(() -> new NotFoundEntityException(format("user with id: %s not found", id)));
+    }
+
     @Transactional
     public void register(UserRegModel user) {
         User eUser = mapper.map(user, User.class);
         eUser.setPassword(passwordEncoder.encode(eUser.getPassword()));
         userRepository.save(eUser);
+    }
+
+    @Transactional
+    public void update(UserDto userdto) {
+        Optional<User> uEntityOptional = userRepository.findById(userdto.getId());
+        if (!uEntityOptional.isPresent()){
+            throw new NotFoundEntityException(format("user with id: %s not found", userdto.getId()));
+        }
+        User uEntity = uEntityOptional.get();
+        mapper.map(userdto, uEntity);
     }
 
     @Transactional(readOnly = true)
