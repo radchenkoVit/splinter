@@ -47,7 +47,7 @@ public class MainController {
             @AuthenticationPrincipal UserPrincipal user,//TODO: офигеть просто
             @RequestParam(name = "text") String text,
             @RequestParam(name = "tag") String tag,//TODO: fix IO exception
-            @RequestParam(name = "image_file", required = false) MultipartFile file) throws IOException {
+            @RequestParam(name = "imageFile", required = false) MultipartFile file) throws IOException {
         Message message = new Message(null, text, tag, user.getUser(), null);
 
         //TODO: refactor
