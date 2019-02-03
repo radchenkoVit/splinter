@@ -8,36 +8,29 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "messages")
-@Setter @Getter
+@Table(name = "images")
 @EqualsAndHashCode(of = "id")
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Message {
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String text;
-    @Column(nullable = false)
-    private String tag;
+    @Column
+    private String path;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User author;
-
-    @OneToOne(mappedBy = "message")
-    private Image image;
+    @OneToOne
+    @JoinColumn(name = "message_id")
+    private Message message;
 }

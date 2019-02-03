@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 
@@ -40,8 +41,9 @@ public class MainController {
     public String addMessage(
             @AuthenticationPrincipal UserPrincipal user,//TODO: офигеть просто
             @RequestParam(name = "text") String text,
-            @RequestParam(name = "tag") String tag) {
-        Message message = new Message(null, text, tag, user.getUser());
+            @RequestParam(name = "tag") String tag,
+            MultipartFile file) {
+        Message message = new Message(null, text, tag, user.getUser(), null);
         messageService.save(message);
         return "redirect:/";
     }
