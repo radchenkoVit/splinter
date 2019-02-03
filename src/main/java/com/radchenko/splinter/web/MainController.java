@@ -1,6 +1,8 @@
 package com.radchenko.splinter.web;
 
+import com.radchenko.splinter.entity.Image;
 import com.radchenko.splinter.entity.Message;
+import com.radchenko.splinter.service.ImageService;
 import com.radchenko.splinter.service.MessageService;
 import com.radchenko.splinter.service.auth.UserPrincipal;
 import com.radchenko.splinter.web.response.MessageDto;
@@ -14,16 +16,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Collection;
 
 @Controller
 @RequestMapping(path = "/")
 public class MainController {
     private final MessageService messageService;
+    private final ImageService imageService;
 
     @Autowired
-    public MainController(MessageService messageService) {
+    public MainController(MessageService messageService, ImageService imageService) {
         this.messageService = messageService;
+        this.imageService = imageService;
     }
 
     @GetMapping
@@ -41,9 +46,18 @@ public class MainController {
     public String addMessage(
             @AuthenticationPrincipal UserPrincipal user,//TODO: офигеть просто
             @RequestParam(name = "text") String text,
-            @RequestParam(name = "tag") String tag,
-            MultipartFile file) {
+            @RequestParam(name = "tag") String tag,//TODO: fix IO exception
+            @RequestParam(name = "image_file", required = false) MultipartFile file) throws IOException {
         Message message = new Message(null, text, tag, user.getUser(), null);
+
+        //TODO: refactor
+        if (file != null && !file.isEmpty()) {
+            Image image = new Image();
+            image.setPath(imageService.saveImage(file));
+            message.setImage(image);
+            image.setMessage(message);
+        }
+
         messageService.save(message);
         return "redirect:/";
     }

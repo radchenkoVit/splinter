@@ -16,7 +16,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/img/**")//TODO: for future
+        registry.addResourceHandler("/img/**")//TODO: for future, if i want load data ftom static folder in project
                 .addResourceLocations("file://");
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");

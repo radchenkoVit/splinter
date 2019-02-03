@@ -8,4 +8,5 @@ public class MessageDto {
     private String text;
     private String tag;
     private UserDto author;
+    private ImageDto image;
 }

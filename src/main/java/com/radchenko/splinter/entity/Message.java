@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,6 +39,6 @@ public class Message {
     @JoinColumn(name = "user_id")
     private User author;
 
-    @OneToOne(mappedBy = "message")
+    @OneToOne(mappedBy = "message", cascade = CascadeType.ALL)
     private Image image;
 }
