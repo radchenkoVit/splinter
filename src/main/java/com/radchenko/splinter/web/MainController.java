@@ -34,7 +34,7 @@ public class MainController {
     @GetMapping
     public String messageView(@RequestParam(name = "msg_tag_filter", required = false) String tagFilter, Model model) {
         Collection<MessageDto> messages = tagFilter != null && !tagFilter.isEmpty() ? messageService.filterByTag(tagFilter) : messageService.getAll();
-        String tagAttr = tagFilter != null && !tagFilter.isEmpty() ? tagFilter : "";
+        String tagAttr = tagFilter != null && !tagFilter.isEmpty() ? tagFilter.trim() : "";
 
         model.addAttribute("messages", messages);
         model.addAttribute("tagFilter", tagAttr);

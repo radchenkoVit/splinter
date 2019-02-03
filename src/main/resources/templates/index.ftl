@@ -1,11 +1,7 @@
 <#import "parts/common.ftl" as c>
-<#import "parts/logout.ftl" as l>
 
 <@c.page>
     <div id="app">
-        <@l.logout/>
-        <span><a href="/user">Users Page</a></span>
-
         <form action="/" method="post" enctype="multipart/form-data">
             <input name="text" placeholder="Write Message Here"/>
             <input name="tag" placeholder="Write Tag Here"/>

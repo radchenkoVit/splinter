@@ -1,4 +1,5 @@
 <#include "security.ftl">
+<#import "logout.ftl" as l>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Splinter</a>
@@ -24,5 +25,6 @@
         <div class="navbar-text mr-sm-2">
             ${name}
         </div>
+        <@l.logout/>
     </div>
 </nav>
