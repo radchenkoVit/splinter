@@ -7,15 +7,19 @@
         </div>
 
         <form action="/login" method="post">
-            <div><label> Email : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <#--<input id="csrf_token" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-
-        <form action="/registration" method="get">
-            <#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
-            <input type="submit" value="Register"/>
+            <div class="form-group">
+                <label for="username">Email address</label>
+                <input type="email" name="username" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <div>
+                <input class="btn btn-primary" type="submit" value="Sign In"/>
+                <a href="/registration" role="button" class="btn btn-primary">Register</a>
+            </div>
         </form>
     </div>
 </@c.page>

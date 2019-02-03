@@ -1,10 +1,12 @@
 package com.radchenko.splinter.service.auth;
 
 import com.radchenko.splinter.entity.User;
+import com.radchenko.splinter.entity.role.RoleType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import static java.util.stream.Collectors.toList;
@@ -18,6 +20,10 @@ public class UserPrincipal implements UserDetails {
 
     public User getUser() {
         return user;
+    }
+
+    public boolean isAdmin() {
+        return user.getRoles().stream().anyMatch(r -> r.getName() == RoleType.ROLE_ADMIN);
     }
 
     @Override
