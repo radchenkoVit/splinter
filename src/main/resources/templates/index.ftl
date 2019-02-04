@@ -1,4 +1,7 @@
 <#import "parts/common.ftl" as c>
+<#import "parts/pager.ftl" as p>
+
+
 
 <@c.page>
     <div id="app">
@@ -38,7 +41,7 @@
         </form>
 
         <div class="card-columns">
-            <#list messages>
+            <#list pageable.getContent()>
                 <#items as m>
                 <div class="card my-3">
                     <div>
@@ -57,5 +60,6 @@
                 </#items>
             </#list>
         </div>
+        <@p.pagination url pageable.getTotalPages()/>
     </div>
 </@c.page>
