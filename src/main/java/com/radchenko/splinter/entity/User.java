@@ -45,6 +45,12 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "activation_code")
+    private String activationCode;
+
+    @Column
+    private boolean active;
+
     @Setter(AccessLevel.PRIVATE)
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Role> roles = new HashSet<>();

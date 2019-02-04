@@ -4,6 +4,8 @@ create table users (
   last_name  VARCHAR(255),
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
+  activation_code VARCHAR(255),
+  active BOOLEAN DEFAULT FALSE,
   CONSTRAINT users_PK PRIMARY KEY (id)
 );
 

@@ -31,13 +31,15 @@ public class RegistrationController {
 
 
     @PostMapping
-    public String registration(@Valid UserRegModel regModel) {
+    public String registration(@Valid UserRegModel regModel, Model model) {
         if (userService.findByEmail(regModel.getEmail()).isPresent()){
-            return "redirect:/registration?error=user with email already exist";
+            model.addAttribute("error", "user with email already exist");
+            return "redirect:/registration";
         }
 
         userService.register(regModel);
-        return "redirect:/login?message=User created. Please log in";//TODO
+//        model.addAttribute("message", "User created. Please log in");
+        return "redirect:/login?message=test";//TODO: not displaying message
     }
 
 }

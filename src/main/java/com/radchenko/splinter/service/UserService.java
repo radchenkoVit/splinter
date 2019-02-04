@@ -12,4 +12,5 @@ public interface UserService {
     void register(UserRegModel user);
     void update(UserDto user);
     List<UserDto> getAll();
+    UserDto activateUser(String code);
 }

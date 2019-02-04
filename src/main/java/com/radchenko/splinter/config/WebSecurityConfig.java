@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login", "/registration").permitAll()
+                .antMatchers("/login", "/registration", "/activate/*").permitAll()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/user**").hasRole(ROLE_ADMIN.val()) //forbid to see add application page except user with Developer Role
