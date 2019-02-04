@@ -5,6 +5,7 @@ import com.radchenko.splinter.repository.MessageRepository;
 import com.radchenko.splinter.web.response.MessageDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +33,14 @@ public class MessageServiceImpl implements MessageService {
                 .collect(toList());
     }
 
+    @Transactional(readOnly = true)
+    public List<MessageDto> getAll(Pageable pageable) {
+        return messageRepository.findAll(pageable)
+                .get()
+                .map(m -> mapper.map(m, MessageDto.class))
+                .collect(toList());
+    }
+
     @Transactional
     public MessageDto save(Message message) {
        Message saved = messageRepository.save(message);
@@ -39,9 +48,9 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Transactional(readOnly = true)
-    public List<MessageDto> filterByTag(String tagFilter) {
+    public List<MessageDto> filterByTag(String tagFilter, Pageable pageable) {
         return messageRepository
-                .findByTag(tagFilter)
+                .findByTag(tagFilter, pageable)
                 .stream()
                 .map(m -> mapper.map(m, MessageDto.class))
                 .collect(toList());

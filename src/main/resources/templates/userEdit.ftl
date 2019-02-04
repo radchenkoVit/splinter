@@ -3,7 +3,6 @@
 
 <@c.page>
     <div id="app">
-    <@l.logout/>
         User Editor
     <form action="/user/edit" method="post">
     <input type="hidden" name="id" value="${user.id}"/>

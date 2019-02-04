@@ -7,6 +7,9 @@ import com.radchenko.splinter.service.MessageService;
 import com.radchenko.splinter.service.auth.UserPrincipal;
 import com.radchenko.splinter.web.response.MessageDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,8 +35,10 @@ public class MainController {
     }
 
     @GetMapping
-    public String messageView(@RequestParam(name = "msg_tag_filter", required = false) String tagFilter, Model model) {
-        Collection<MessageDto> messages = tagFilter != null && !tagFilter.isEmpty() ? messageService.filterByTag(tagFilter) : messageService.getAll();
+    public String messageView(@RequestParam(name = "msg_tag_filter", required = false) String tagFilter,
+                              Model model,
+                              @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 20) Pageable page) {
+        Collection<MessageDto> messages = tagFilter != null && !tagFilter.isEmpty() ? messageService.filterByTag(tagFilter, page) : messageService.getAll(page);
         String tagAttr = tagFilter != null && !tagFilter.isEmpty() ? tagFilter.trim() : "";
 
         model.addAttribute("messages", messages);

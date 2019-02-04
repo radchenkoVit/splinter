@@ -1,10 +1,7 @@
 <#import "parts/common.ftl" as c>
-<#import "parts/logout.ftl" as l>
 
 <@c.page>
     <div id="app">
-        <@l.logout/>
-
     <p>List of users</p>
     <table>
         <thead>
