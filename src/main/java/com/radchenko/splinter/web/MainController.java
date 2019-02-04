@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Collection;
 
 @Controller
 @RequestMapping(path = "/")
@@ -42,7 +41,7 @@ public class MainController {
         Page<MessageDto> pageable = tagFilter != null && !tagFilter.isEmpty() ? messageService.filterByTag(tagFilter, page) : messageService.getAll(page);
         String tagAttr = tagFilter != null && !tagFilter.isEmpty() ? tagFilter.trim() : "";
 
-        model.addAttribute("url", "/main");
+        model.addAttribute("url", "/");
         model.addAttribute("pageable", pageable);
         model.addAttribute("tagFilter", tagAttr);
 

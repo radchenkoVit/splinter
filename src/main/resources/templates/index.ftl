@@ -60,6 +60,6 @@
                 </#items>
             </#list>
         </div>
-        <@p.pagination url pageable.getTotalPages()/>
+        <@p.pagination url pageable/>
     </div>
 </@c.page>
